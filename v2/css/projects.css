@@ -1,0 +1,122 @@
+/* ============================================
+   404CTO V2 - Projects Section (Upgraded)
+   ============================================ */
+
+.projects {
+    padding: var(--space-5xl) var(--space-xl);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.projects__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+}
+
+/* ── Project Card ── */
+.project-card {
+    /* inherits .terminal-window styles */
+}
+
+.project-card .terminal-body {
+    padding: var(--space-xl);
+}
+
+/* ── Project Header ── */
+.project-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+}
+
+.project-card__header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.project-card__icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.project-card__icon-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.project-card__name {
+    font-size: var(--font-size-2xl);
+    color: var(--green);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.project-card__tagline {
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+}
+
+.project-card__desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+}
+
+/* ── Project Metrics ── */
+.project-card__metrics {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--card-radius-sm);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+/* ── Project Action ── */
+.project-card__action {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-subtle);
+}
+
+/* ── Redacted Card (Coming Soon) ── */
+.project-card--redacted .terminal-body {
+    position: relative;
+}
+
+.project-card--redacted .project-card__name {
+    color: var(--amber);
+}
+
+.project-card--redacted .project-card__metrics {
+    border-color: rgba(255, 184, 0, 0.15);
+}
+
+.project-card--redacted .terminal-titlebar {
+    border-bottom-color: rgba(255, 184, 0, 0.1);
+}
+
+.project-card--redacted:hover {
+    border-color: rgba(255, 184, 0, 0.4);
+    box-shadow: 0 0 20px rgba(255, 184, 0, 0.1), 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Access Denied Text ── */
+.project-card__denied {
+    color: var(--red);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.project-card__denied .prompt {
+    color: var(--text-dim);
+}

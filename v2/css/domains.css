@@ -1,0 +1,110 @@
+/* ============================================
+   404CTO V2 - Domains Section (DNS Lookup)
+   ============================================ */
+
+.domains {
+    padding: var(--space-4xl) var(--space-lg);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* ── DNS Terminal ── */
+.domains__terminal {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.domains__terminal .terminal-body {
+    padding: var(--space-lg) var(--space-xl);
+}
+
+/* ── Command ── */
+.domains__cmd {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.domains__cmd .prompt {
+    color: var(--green);
+}
+
+/* ── DNS Group ── */
+.domains__group {
+    margin-bottom: var(--space-xl);
+}
+
+.domains__group-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-dim);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 0.5px;
+}
+
+/* ── DNS Row ── */
+.domains__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: 6px 0;
+    font-size: var(--font-size-sm);
+    transition: background var(--transition-fast);
+    border-radius: 4px;
+    padding-left: var(--space-sm);
+    margin-left: calc(-1 * var(--space-sm));
+    margin-right: calc(-1 * var(--space-sm));
+    padding-right: var(--space-sm);
+}
+
+.domains__row:hover {
+    background: var(--green-muted);
+}
+
+.domains__row-domain {
+    color: var(--green);
+    font-weight: 500;
+    min-width: 200px;
+}
+
+.domains__row-domain a {
+    color: inherit;
+    text-decoration: none;
+    transition: text-shadow var(--transition-fast);
+}
+
+.domains__row-domain a:hover {
+    text-shadow: 0 0 8px var(--green-glow);
+}
+
+.domains__row-type {
+    color: var(--text-dim);
+    min-width: 50px;
+    font-size: var(--font-size-xs);
+}
+
+.domains__row-status {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+}
+
+.domains__row-status--active {
+    color: var(--green);
+}
+
+.domains__row-status--demo {
+    color: var(--cyan);
+}
+
+/* ── DNS Footer ── */
+.domains__footer {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-subtle);
+    font-size: var(--font-size-xs);
+    color: var(--text-dim);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}

@@ -1,0 +1,221 @@
+/* ============================================
+   404CTO V2 - Base Styles & Reset
+   ============================================ */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-mono);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ── Selection ── */
+::selection {
+    background: var(--green);
+    color: var(--bg-primary);
+}
+
+::-moz-selection {
+    background: var(--green);
+    color: var(--bg-primary);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-normal);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--green-dim);
+}
+
+/* ── Links ── */
+a {
+    color: var(--green);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--green-bright);
+}
+
+/* ── Images ── */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ── Lists ── */
+ul,
+ol {
+    list-style: none;
+}
+
+/* ── Headings ── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--green);
+}
+
+/* ── Section Base ── */
+section {
+    position: relative;
+    padding: var(--space-5xl) var(--space-xl);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* ── Container ── */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+/* ── Section Title ── */
+.section-header {
+    margin-bottom: var(--space-3xl);
+    text-align: left;
+}
+
+.section-cmd {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+    font-weight: 400;
+}
+
+.section-cmd .prompt {
+    color: var(--green);
+}
+
+.section-title {
+    font-size: var(--font-size-4xl);
+    color: var(--green);
+    text-shadow: 0 0 30px var(--green-glow);
+    letter-spacing: -0.5px;
+    font-weight: 800;
+}
+
+.section-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-top: var(--space-sm);
+    font-weight: 400;
+}
+
+/* ── Utility Classes ── */
+.text-green {
+    color: var(--green);
+}
+
+.text-amber {
+    color: var(--amber);
+}
+
+.text-red {
+    color: var(--red);
+}
+
+.text-cyan {
+    color: var(--cyan);
+}
+
+.text-dim {
+    color: var(--text-dim);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.glow {
+    text-shadow: 0 0 10px var(--green-glow), 0 0 20px var(--green-glow);
+}
+
+.glow-strong {
+    text-shadow: 0 0 10px var(--green-glow-strong), 0 0 30px var(--green-glow), 0 0 60px var(--green-glow);
+}
+
+/* ── Scroll Reveal ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Cursor Blink ── */
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--green);
+    margin-left: 2px;
+    animation: cursorBlink 1s step-end infinite;
+    vertical-align: text-bottom;
+}
+
+@keyframes cursorBlink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ── Section Divider ── */
+.section-divider {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-normal), transparent);
+}

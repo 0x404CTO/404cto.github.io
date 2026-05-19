@@ -1,0 +1,229 @@
+/* ============================================
+   404CTO V2 - Responsive Breakpoints (Upgraded)
+   ============================================ */
+
+/* ── Tablet (< 1024px) ── */
+@media (max-width: 1024px) {
+    :root {
+        --font-size-hero: 5rem;
+        --font-size-4xl: 2.5rem;
+        --space-4xl: 100px;
+        --space-5xl: 140px;
+    }
+
+    /* Navbar: show mobile toggle */
+    .navbar__links {
+        display: none;
+    }
+
+    .navbar__toggle {
+        display: flex;
+    }
+
+    /* Hero */
+    .hero__content {
+        max-width: 900px;
+    }
+
+    /* Projects: keep 2 cols */
+    .projects__grid {
+        gap: var(--space-lg);
+    }
+
+    /* Team: keep 2 cols */
+    .team__grid {
+        gap: var(--space-lg);
+    }
+}
+
+/* ── Mobile Large (< 768px) ── */
+@media (max-width: 768px) {
+    :root {
+        --font-size-hero: 3.5rem;
+        --font-size-4xl: 2rem;
+        --font-size-3xl: 1.6rem;
+        --space-4xl: 72px;
+        --space-5xl: 100px;
+        --nav-height: 50px;
+    }
+
+    section {
+        padding: var(--space-3xl) var(--space-md);
+    }
+
+    /* Hero */
+    .hero {
+        padding-left: var(--space-md);
+        padding-right: var(--space-md);
+    }
+
+    .hero__content {
+        max-width: 100%;
+    }
+
+    .hero__subtitle {
+        max-width: 100%;
+    }
+
+    .hero__chips {
+        gap: 6px;
+    }
+
+    .hero__ctas {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero__cta {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Projects: single column */
+    .projects__grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Team: single column */
+    .team__grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Roadmap */
+    .roadmap__terminal .terminal-body {
+        padding: var(--space-lg) var(--space-lg);
+    }
+
+    /* Domains */
+    .domains__terminal .terminal-body {
+        padding: var(--space-md);
+    }
+
+    .domains__row {
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+    }
+
+    .domains__row-domain {
+        min-width: unset;
+        width: 100%;
+    }
+
+    /* Footer */
+    .footer__socials {
+        gap: var(--space-sm);
+    }
+
+    .footer__mini-status {
+        flex-direction: column;
+        gap: var(--space-xs);
+        border-radius: var(--card-radius-sm);
+    }
+
+    .footer__status-bar {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .footer__status-sep {
+        display: none;
+    }
+
+    .footer__brand-name {
+        font-size: var(--font-size-2xl);
+    }
+}
+
+/* ── Mobile Small (< 480px) ── */
+@media (max-width: 480px) {
+    :root {
+        --font-size-hero: 2.6rem;
+        --font-size-4xl: 1.6rem;
+        --font-size-3xl: 1.4rem;
+        --font-size-2xl: 1.25rem;
+        --font-size-xl: 1.1rem;
+        --space-4xl: 56px;
+        --space-5xl: 72px;
+        --space-3xl: 48px;
+    }
+
+    .navbar__inner {
+        padding: 0 var(--space-md);
+    }
+
+    .navbar__logo-text {
+        font-size: var(--font-size-xs);
+    }
+
+    /* Hero */
+    .hero__title {
+        letter-spacing: -1px;
+    }
+
+    .hero__tagline {
+        font-size: var(--font-size-base);
+    }
+
+    .hero__chips {
+        gap: 4px;
+    }
+
+    .hero__chip {
+        padding: 3px 10px;
+        font-size: 0.65rem;
+    }
+
+    /* Team card: stack vertically */
+    .team-card .terminal-body {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--space-lg);
+    }
+
+    .team-card__stat {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .team-card__stat-key {
+        min-width: unset;
+    }
+
+    /* Project card */
+    .project-card .terminal-body {
+        padding: var(--space-lg);
+    }
+
+    .project-card__name {
+        font-size: var(--font-size-lg);
+    }
+
+    .metric-row {
+        font-size: var(--font-size-xs);
+    }
+
+    .metric-row__key {
+        min-width: 100px;
+    }
+
+    /* Roadmap */
+    .roadmap__entry {
+        padding-left: var(--space-md);
+    }
+
+    .roadmap__terminal .terminal-body {
+        padding: var(--space-md);
+    }
+
+    /* Footer social links */
+    .footer__social-link {
+        width: 36px;
+        height: 36px;
+    }
+
+    .footer__social-link img {
+        width: 16px;
+        height: 16px;
+    }
+}

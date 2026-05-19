@@ -1,788 +1,621 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404CTO × Singularity Lab</title>
-    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
-            background: #101010;
-            color: #00ff99;
-            scroll-behavior: smooth;
-        }
+    <title>404CTO — Chaos-Driven Web3 Builder Collective</title>
+    <meta name="description"
+        content="404CTO is a chaos-driven, meme-native Web3 builder collective. No VC. No roadmap manipulation. Just shipping.">
+    <meta name="keywords"
+        content="404CTO, Web3, blockchain, builder collective, meme, crypto, DeFi, dice game, wallet, security">
 
-        header {
-            background: #181818;
-            padding: 18px 40px 8px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            box-sizing: border-box;
-            box-shadow: 0 2px 12px #00ff9922;
-            position: fixed;
-        }
+    <!-- Open Graph -->
+    <meta property="og:title" content="404CTO — Chaos-Driven Web3 Builder Collective">
+    <meta property="og:description"
+        content="We accidentally built real products. No VC. No roadmap manipulation. Just shipping.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://404cto.com/">
 
-        header::after {
-            content: "";
-            display: block;
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 2px;
-            height: 2px;
-            background: #00ff99;
-            z-index: 20;
-        }
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
-        .logo {
-            display: flex;
-            align-items: center;
-            margin-right: auto;
-            background: rgba(16, 16, 16, 0.8);
-            padding: 8px 16px;
-            border: 1px solid #00ff9944;
-            border-radius: 12px;
-            transform: translateY(-4px) translateX(-20px);
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transform: translateY(-4px);
-        }
-        .logo img {
-            height: 52px;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px #00ff9944;
-            z-index: 10;
-            margin-top: 4px;
-        }
-        .logo-separator {
-            color: #00ff99;
-            font-weight: bold;
-            font-size: 3rem;
-            margin: 0 8px;
-            opacity: 0.8;
-        }
-        .logo-bracket {
-            color: #00ff99;
-            font-weight: bold;
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
+    <!-- CSS -->
+    <link rel="stylesheet" href="v2/css/variables.css">
+    <link rel="stylesheet" href="v2/css/base.css">
+    <link rel="stylesheet" href="v2/css/animations.css">
+    <link rel="stylesheet" href="v2/css/crt.css">
+    <link rel="stylesheet" href="v2/css/grid-bg.css">
+    <link rel="stylesheet" href="v2/css/components.css">
+    <link rel="stylesheet" href="v2/css/navbar.css">
+    <link rel="stylesheet" href="v2/css/hero.css">
+    <link rel="stylesheet" href="v2/css/projects.css">
+    <link rel="stylesheet" href="v2/css/team.css">
+    <link rel="stylesheet" href="v2/css/roadmap.css">
+    <link rel="stylesheet" href="v2/css/domains.css">
+    <link rel="stylesheet" href="v2/css/footer.css">
+    <link rel="stylesheet" href="v2/css/responsive.css">
 
-        nav ul {
-            list-style-type: none;
-            display: flex;
-            gap: 24px;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            position: relative;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #00ff99;
-            font-weight: 600;
-            font-size: 1rem;
-            border-radius: 4px;
-            padding: 4px 12px;
-            background: #101010;
-            border: 1px solid #00ff99;
-            transition: color 0.2s, background 0.2s;
-        }
-        nav ul li a:hover {
-            color: #101010;
-            background: #00ff99;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #333;
-            list-style: none;
-            padding: 10px;
-            border-radius: 8px;
-            z-index: 99;
-        }
-        .dropdown-menu li {
-            padding: 5px 10px;
-        }
-        .dropdown-menu li:hover {
-            background-color: #444;
-        }
-        .dropdown-menu li a {
-            color: #fff;
-        }
-
-        .hero {
-            height: 100vh;
-            background: #181818;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-bottom: 2px solid #00ff99;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            color: #00ff99;
-            margin-bottom: 12px;
-            text-shadow: 0 0 16px #00ff99cc;
-            letter-spacing: 2px;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: #00ff99cc;
-            max-width: 900px;
-            background: #101010;
-            border-left: 4px solid #00ff99;
-            padding: 12px 24px;
-            margin: 0 auto;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-        }
-
-        section {
-            width: 100%;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            color: #00ff99;
-            letter-spacing: 1px;
-        }
-        .content-block {
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-
-        /* 团队产品 */
-        #products .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-        }
-        .product-card {
-            background: #101010;
-            padding: 28px 18px 22px 18px;
-            border-radius: 12px;
-            border: 1px solid #00ff99;
-            box-shadow: 0 4px 32px #00ff9911;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-            position: relative;
-        }
-        .product-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 40px #00ff9933;
-        }
-        .product-card img {
-            width: 54px;
-            height: 54px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px #00ff9944;
-        }
-        .product-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #00ff99;
-            letter-spacing: 1px;
-        }
-        .product-card p {
-            font-size: 1rem;
-            color: #00ff99cc;
-        }
-        .card-link-arrow {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            color: #00ff99;
-            font-size: 1.3rem;
-            opacity: 0.7;
-            transition: color 0.2s, opacity 0.2s;
-            pointer-events: none;
-            user-select: none;
-        }
-        .product-card:hover .card-link-arrow {
-            color: #fff;
-            opacity: 1;
-        }
-
-        .card-more-btn {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 4px 16px;
-            background: #101010;
-            color: #00ff99;
-            border: 1px solid #00ff99;
-            border-radius: 6px;
-            font-size: 0.98rem;
-            text-decoration: none;
-            transition: background 0.2s, color 0.2s;
-        }
-        .card-more-btn:hover {
-            background: #00ff99;
-            color: #101010;
-        }
-
-        /* 团队成员 */
-        #team .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-        }
-        .team-member {
-            background: #101010;
-            padding: 28px 18px 22px 18px;
-            border-radius: 12px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 32px #00ff9911;
-            border: 1px solid #00ff99;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-        }
-        .team-member:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 40px #00ff9933;
-        }
-        .team-member img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 12px #00ff9944;
-        }
-        .team-member h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: #00ff99;
-        }
-        .team-member p {
-            font-size: 1rem;
-            color: #00ff99cc;
-        }
-
-        footer {
-            background: #181818;
-            padding: 24px 0 12px 0;
-            text-align: center;
-            color: #00ff99cc;
-            border-top: 2px solid #00ff99;
-            font-size: 1rem;
-            margin-top: 60px;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-        }
-        .social-links a {
-            margin: 0 15px;
-            font-size: 1.1rem;
-            color: #00ff99;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .social-links a:hover {
-            color: #101010;
-            background: #00ff99;
-            border-radius: 6px;
-            padding: 2px 8px;
-        }
-
-        /* 手机端自适应 */
-        @media (max-width: 900px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .section-title { font-size: 1.5rem; }
-            header { padding: 10px 10px; }
-            nav ul { gap: 10px; }
-            .product-card, .team-member { padding: 18px 6px 14px 6px; }
-        }
-
-        @media (max-width: 600px) {
-            header { flex-direction: column; align-items: flex-start; }
-            .logo img { height: 36px; }
-            nav ul { flex-direction: row; flex-wrap: wrap; gap: 6px; }
-            nav ul li a { font-size: 13px; padding: 5px 8px; }
-            .hero { padding-top: 60px; }
-            section { padding: 30px 2px; }
-            .content-block { padding: 0 2px; }
-            .timeline {
-                max-width: 100%;
-                padding-left: 0;
-                border-left-width: 2px;
-            }
-            .timeline li {
-                padding-left: 0;
-            }
-            .timeline-date {
-                position: static !important;
-                display: block;
-                width: auto;
-                left: auto;
-                top: auto;
-                text-align: left;
-                font-size: 1rem;
-                color: #00ff99;
-                margin-bottom: 2px;
-                margin-left: 0;
-                margin-top: 0;
-            }
-            .timeline-dot {
-                left: -8px;
-                width: 10px;
-                height: 10px;
-            }
-        }
-
-        .timeline {
-            list-style: none;
-            margin: 0 auto;
-            padding: 0;
-            max-width: 600px;
-            position: relative;
-            border-left: 3px solid #00ff99;
-        }
-
-        .timeline li {
-            position: relative;
-            margin-bottom: 40px;
-            padding-left: 36px;
-            min-height: 36px;
-        }
-
-        .timeline-date {
-            position: absolute;
-            left: -110px;
-            top: 0;
-            color: #00ff99;
-            font-weight: bold;
-            font-size: 1.1rem;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-            width: 90px;
-            text-align: right;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -18px;
-            top: 6px;
-            width: 14px;
-            height: 14px;
-            background: #101010;
-            border: 3px solid #00ff99;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #00ff99cc;
-        }
-
-        .timeline-main {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2px;
-        }
-
-        .timeline-title {
-            color: #3cffb0;
-            font-size: 1.18rem;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-            line-height: 1.3;
-        }
-
-        .timeline-desc {
-            color: #b2ffe7;
-            font-size: 0.98rem;
-            font-family: 'Fira Mono', 'Consolas', monospace;
-            font-weight: 400;
-            line-height: 1.5;
-            margin-bottom: 2px;
-            margin-left: 2px;
-            word-break: break-all;
-        }
-
-        @media (max-width: 700px) {
-            .timeline { border-left-width: 2px; }
-            .timeline-date { left: -90px; font-size: 1rem; width: 70px;}
-            .timeline-dot { left: -14px; width: 10px; height: 10px; }
-            .timeline-content { font-size: 1rem; }
-        }
-
-        .language-toggle {
-            display: inline-block;
-            text-decoration: none;
-            color: #00ff99;
-            font-weight: 600;
-            font-size: 1rem;
-            border-radius: 4px;
-            padding: 4px 12px;
-            background: #101010;
-            border: 1px solid #00ff99;
-            transition: color 0.2s, background 0.2s;
-            cursor: pointer;
-            /* 保证和其他按钮高度一致 */
-            box-sizing: border-box;
-        }
-        .language-toggle:hover {
-            color: #101010;
-            background: #00ff99;
-        }
-
-        .domain-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-            margin-top: 40px;
-        }
-
-        .domain-item {
-            background: #101010;
-            padding: 28px 18px 22px 18px;
-            border-radius: 12px;
-            border: 1px solid #00ff99;
-            box-shadow: 0 4px 32px #00ff9911;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .domain-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 40px #00ff9933;
-        }
-
-        .domain-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #00ff99;
-            letter-spacing: 1px;
-        }
-
-        .domain-item p {
-            font-size: 1rem;
-            color: #00ff99cc;
-        }
-
-        .domain-item a {
-            color: #00ff99;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .domain-item a:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
-    </style>
-    <script>
-        // 切换语言的功能
-        function toggleLanguage(lang, event) {
-            if (event) {
-                event.preventDefault(); // 阻止页面跳转
-            }
-            
-            const elementsZh = document.querySelectorAll('[data-lang="zh"]');
-            const elementsEn = document.querySelectorAll('[data-lang="en"]');
-            const languageToggle = document.querySelector('.language-toggle');
-
-            if (lang === 'zh') {
-                elementsZh.forEach(el => el.style.display = 'block');
-                elementsEn.forEach(el => el.style.display = 'none');
-                languageToggle.textContent = '▾ 语言选择';
-                document.getElementById('roadmap-image').src = 'assets/roadmap_zh.png';
-            } else {
-                elementsZh.forEach(el => el.style.display = 'none');
-                elementsEn.forEach(el => el.style.display = 'block');
-                languageToggle.textContent = '▾ Language';
-                document.getElementById('roadmap-image').src = 'assets/roadmap_en.png';
-            }
-        }
-
-        function toggleDropdown(event) {
-            event.preventDefault(); // 阻止页面跳转
-            const dropdownMenu = document.querySelector('.dropdown-menu');
-            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // 在页面加载时默认显示英文内容
-        document.addEventListener('DOMContentLoaded', () => {
-            toggleLanguage('en'); // 默认显示英文
-        });
-
-        // 点击页面其他地方时隐藏下拉菜单
-        document.addEventListener('click', function(event) {
-            const dropdownMenu = document.querySelector('.dropdown-menu');
-            if (!event.target.closest('.dropdown-menu') && !event.target.closest('.language-toggle')) {
-                dropdownMenu.style.display = 'none';
-            }
-        });
-    </script>
+    <!-- JS (ES Module) -->
+    <script type="module" src="v2/js/main.js"></script>
 </head>
+
 <body>
 
-<header>
-    <div class="logo">
-        <div class="logo-container">
-            <img src="./assets/newlogo3.png" alt="404CTO Logo">
-            <span class="logo-separator">×</span>
-            <img src="./assets/logo.jpg" alt="Singularity Lab Logo">
-        </div>
-    </div>
-    <nav>
-    <ul>
-        <li><a href="#vision" data-lang="zh">愿景</a><a href="#vision" data-lang="en" style="display:none;">Vision</a></li>
-        <li><a href="#products" data-lang="zh">项目</a><a href="#products" data-lang="en" style="display:none;">Projects</a></li>
-        <li><a href="#roadmap" data-lang="zh">路线</a><a href="#roadmap" data-lang="en" style="display:none;">Roadmap</a></li>
-        <li><a href="#domains" data-lang="zh">域名</a><a href="#domains" data-lang="en" style="display:none;">Domains</a></li>
-        <li><a href="#team" data-lang="zh">成员</a><a href="#team" data-lang="en" style="display:none;">Team</a></li>
-        <li><a href="#social" data-lang="zh">社交</a><a href="#social" data-lang="en" style="display:none;">Social</a></li>
-        <li>
-            <a href="#" onclick="toggleDropdown(event)" class="language-toggle">▾ 语言选择</a>
-            <ul class="dropdown-menu">
-                <li><a href="#" onclick="toggleLanguage('zh', event)">中文</a></li>
-                <li><a href="#" onclick="toggleLanguage('en', event)">English</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
-</header>
+    <!-- ============================================
+       Background Layers
+       ============================================ -->
+    <div class="grid-background"></div>
+    <div class="grid-orb grid-orb-1"></div>
+    <div class="grid-orb grid-orb-2"></div>
+    <div class="grid-orb grid-orb-3"></div>
+    <div class="vignette"></div>
+    <div class="crt-overlay"></div>
 
-<div class="hero" id="vision">
-    <div class="content-block">
-        <h1 data-lang="zh">404CTO × 奇点创新实验室</h1>
-        <h1 data-lang="en" style="display:none;">404CTO × Singularity Lab</h1>
-        <p data-lang="zh">是一个独立的 Web3 构建者集体——没有风投、没有退出计划，也不玩炒作。我们只写代码，依靠社区，一步步部署上线。抗 rug 是我们生存的方式，去中心化是我们的设计哲学。</p>
-        <p data-lang="en" style="display:none;">is an independent Web3 builder collective—no VC, no exit plan, no hype. Just code, community, and mainnet deployments. Rugproof by necessity, decentralized by design.</p>
-    </div>
-</div>
+    <!-- ============================================
+       Navbar
+       ============================================ -->
+    <nav class="navbar" role="navigation">
+        <div class="navbar__inner">
+            <!-- Logo -->
+            <a href="#" class="navbar__logo">
+                <div class="navbar__dots">
+                    <span class="navbar__dot navbar__dot--red"></span>
+                    <span class="navbar__dot navbar__dot--yellow"></span>
+                    <span class="navbar__dot navbar__dot--green"></span>
+                </div>
+                <span class="navbar__logo-text">404CTO</span><span class="navbar__logo-ext">.exe</span>
+            </a>
 
-<section id="products">
-    <h2 class="section-title" data-lang="zh">项目</h2>
-    <h2 class="section-title" data-lang="en" style="display:none;">Projects</h2>
-    <div class="content-block product-grid">
-        <div class="product-card" onclick="window.location.href='./XShield.html';" style="cursor: pointer; position:relative;">
-            <span class="card-link-arrow">&#8599;</span>
-            <img src="assets/xshield.png" alt="icon1">
-            <h3 data-lang="zh">X盾</h3>
-            <h3 data-lang="en" style="display:none;">X-Shield</h3>
-            <p data-lang="zh">X盾是一款可以精准屏蔽推特钓鱼信息、诈骗信息的浏览器插件，这个浏览器插件能完美屏蔽所有试图通过推广和诈骗手法盗取加密货币的信息，不管是推特"广告"、"推荐"，还是web3项目方评论区中的恶意钓鱼链接，本插件都能能精准屏蔽，让你免受钓鱼攻击、诈骗信息、广告信息、恶意信息、滥用信息的困扰，保护你的web3资产安全。</p>
-            <p data-lang="en" style="display:none;">X-Shield is a browser plugin that can precisely block phishing and scam messages on Twitter. This plugin flawlessly filters out any attempt to steal cryptocurrency through promotions and scams, whether it's Twitter 'ads,' 'recommendations,' or malicious phishing links in web3 project comment sections. X Shield blocks them all with pinpoint accuracy, protecting you from phishing attacks, scams, ads, malicious content, and abusive information, ensuring the security of your web3 assets.</p>
+            <!-- Desktop Links -->
+            <div class="navbar__links">
+                <a href="#projects" class="navbar__link">Projects</a>
+                <a href="#team" class="navbar__link">Team</a>
+                <a href="#roadmap" class="navbar__link">Log</a>
+                <a href="mailto:404cto@proton.me" class="navbar__connect">Connect ↗</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar__toggle" aria-label="Menu">
+                <span class="navbar__toggle-line"></span>
+                <span class="navbar__toggle-line"></span>
+                <span class="navbar__toggle-line"></span>
+            </button>
         </div>
-        <div class="product-card" onclick="window.location.href='https://yx.box';" style="cursor: pointer; position:relative;">
-            <span class="card-link-arrow">&#8599;</span>
-            <img src="assets/bubblewand.png" alt="icon2">
-            <h3 data-lang="zh">泡泡棒</h3>
-            <h3 data-lang="en" style="display:none;">Bubble Wand</h3>
-            <p data-lang="zh">泡泡棒发射台可以让你在30秒内轻松创建属于你的Web3区块链骰子游戏，游戏支持中英文无缝切换，骰子游戏包含投注、玩意调节任意胜率、自动投注、坐庄(让玩家成为股东)等玩家功能，还包含设置手续费(给游戏创建者)、全站维护开关、存款开关、投注开关、转让管理员、管理员提现、删除股东等管理员功能。骰子游戏的合约经过严格的安全审计，是完全公平的链上骰子游戏。</p>
-            <p data-lang="en" style="display:none;">Bubble Wand Launchpad allows you to easily create your own Web3 blockchain dice game in 30 seconds. The game supports seamless switching between Chinese and English. The dice game includes player features such as betting, adjusting the odds to any desired win rate, automatic betting, and sitting the table (allowing players to become shareholders). It also includes administrative features such as setting a transaction fee (for the game creator), site-wide maintenance switch, deposit switch, betting switch, transfer of admin rights, admin withdrawals, and removal of shareholders. The dice game's contract has been rigorously security audited and is a fully fair on-chain dice game.</p>
+
+        <!-- Mobile Menu -->
+        <div class="navbar__mobile-menu">
+            <a href="#projects" class="navbar__link">Projects</a>
+            <a href="#team" class="navbar__link">Team</a>
+            <a href="#roadmap" class="navbar__link">Log</a>
+            <a href="mailto:404cto@proton.me" class="navbar__connect">Connect ↗</a>
         </div>
-        <div class="product-card" onclick="window.location.href='https://wallet.404cto.com/';" style="cursor: pointer; position:relative;">
-            <span class="card-link-arrow">&#8599;</span>
-            <img src="assets/walletcrafter.png" alt="icon3">
-            <h3 data-lang="zh">钱包工坊</h3>
-            <h3 data-lang="en" style="display:none;">WalletCrafter</h3>
-            <p data-lang="zh">
-                钱包工坊是一个开源的多链钱包生成器，支持 BTC、ETH(EVM)、TRON、SOL、BCH、SUI、DOGE 等主流区块链。<br>
-                本工具完全前端运行，无需联网，支持本地离线使用，安全可靠。
+    </nav>
+
+    <!-- ============================================
+       Hero Section
+       ============================================ -->
+    <section class="hero" id="hero">
+        <!-- Fake Logs Background -->
+        <div class="hero__logs-bg">
+            <div class="hero__logs-scroll" id="hero-logs"></div>
+        </div>
+
+        <div class="hero__content">
+            <!-- Pre-title -->
+            <div class="hero__pretitle">
+                <span class="prompt">$</span> whoami
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="hero__title">
+                <span class="hero__title-404 glitch-text">404</span>CTO
+            </h1>
+
+            <!-- Typewriter Tagline -->
+            <div class="hero__tagline">
+                <span class="hero__tagline-text" id="hero-tagline"></span>
+            </div>
+
+            <!-- Subtitle -->
+            <p class="hero__subtitle">
+                No VC therapy. No corporate cosplay. Just chaos, code, and onchain experiments that somehow work.
             </p>
-            <p data-lang="en" style="display:none;">
-                WalletCrafter is an open-source multi-chain wallet generator supporting BTC, ETH(EVM), TRON, SOL, BCH, SUI, DOGE and more.<br>
-                All operations are performed locally in your browser — no network required, ensuring maximum security.
-            </p>
-        </div>
-        <div class="product-card">
-            <img src="assets/staytuned.png" alt="icon4">
-            <h3 data-lang="zh">敬请期待</h3>
-            <h3 data-lang="en" style="display:none;">Stay tuned</h3>
-            <p data-lang="zh">敬请期待众多令人惊叹的项目。</p>
-            <p data-lang="en" style="display:none;">Many amazing projects to come.</p>
-        </div>
-    </div>
-</section>
 
-<section id="roadmap">
-    <h2 class="section-title" data-lang="zh">路线</h2>
-    <h2 class="section-title" data-lang="en" style="display:none;">Roadmap</h2>
-    <div class="content-block">
-        <ul class="timeline">
-            <li>
-                <span class="timeline-date">2024-10</span>
-                <span class="timeline-dot"></span>
-                <div class="timeline-main">
-                    <span class="timeline-title" data-lang="zh">奇点实验室成立</span>
-                    <span class="timeline-title" data-lang="en" style="display:none;">Singularity Lab Founded</span>
-                </div>
-            </li>
-            <li>
-                <span class="timeline-date">2024-11</span>
-                <span class="timeline-dot"></span>
-                <div class="timeline-main">
-                    <span class="timeline-title" data-lang="zh">发布X-Shield（X盾）</span>
-                    <span class="timeline-title" data-lang="en" style="display:none;">Released X-Shield</span>
-                    <span class="timeline-desc" data-lang="zh">超强推特防钓鱼插件，无需威胁情报库也可以自动屏蔽一切钓鱼链接。</span>
-                    <span class="timeline-desc" data-lang="en" style="display:none;">Twitter anti-phishing extension, automatically blocks all phishing links without threat intelligence database.</span>
-                </div>
-            </li>
-            <li>
-                <span class="timeline-date">2024-12</span>
-                <span class="timeline-dot"></span>
-                <div class="timeline-main">
-                    <span class="timeline-title" data-lang="zh">发布Bubble Wand（泡泡棒）</span>
-                    <span class="timeline-title" data-lang="en" style="display:none;">Released Bubble Wand</span>
-                    <span class="timeline-desc" data-lang="zh">骰子游戏发射台，10秒发行Web3骰子游戏，发行者赚手续费，玩家可成为股东、调整胜率，游戏全程上链绝对公平。</span>
-                    <span class="timeline-desc" data-lang="en" style="display:none;">Dice game launchpad: create your own Web3 dice game in 10 seconds. Creators earn fees, players can become shareholders and adjust win rates. All gameplay is on-chain for absolute fairness.</span>
-                </div>
-            </li>
-            <li>
-                <span class="timeline-date">2025-04</span>
-                <span class="timeline-dot"></span>
-                <div class="timeline-main">
-                    <span class="timeline-title" data-lang="zh">发布WalletCrafter（钱包工坊）</span>
-                    <span class="timeline-title" data-lang="en" style="display:none;">Released WalletCrafter</span>
-                    <span class="timeline-desc" data-lang="zh">一键生成多链钱包（BTC/ETH/TRON/SOL/BCH/SUI/DOGE），无需联网，网页本地保存即可用。</span>
-                    <span class="timeline-desc" data-lang="en" style="display:none;">One-click generation of multi-chain wallets (BTC/ETH/TRON/SOL/BCH/SUI/DOGE), works offline, can be used by saving the webpage locally.</span>
-                </div>
-            </li>
-            <li>
-                <span class="timeline-date">2025-05</span>
-                <span class="timeline-dot"></span>
-                <div class="timeline-main">
-                    <span class="timeline-title" data-lang="zh">奇点创新实验室更名为404CTO</span>
-                    <span class="timeline-title" data-lang="en" style="display:none;">We have officially rebranded Singularity Lab as 404CTO.</span>
-                    <span class="timeline-desc" data-lang="zh">奇点创新实验室更名为404CTO（404 Community Take Over），原名奇点创新实验室依然保留。</span>
-                    <span class="timeline-desc" data-lang="en" style="display:none;">Singularity Lab has been rebranded as 404CTO (404 Community Take Over), with the original name remaining in use.</span>
-                </div>
-            </li>
-            <li>
-                <span class="timeline-date">2025-0x</span>
-                <span class="timeline-dot"></span>
-                <div class="timeline-main">
-                    <span class="timeline-title" data-lang="zh">敬请期待</span>
-                    <span class="timeline-title" data-lang="en" style="display:none;">Stay tuned</span>
-                </div>
-            </li>
-        </ul>
-    </div>
-</section>
+            <!-- Status Chips -->
+            <div class="hero__chips">
+                <span class="hero__chip"><span class="hero__chip-dot hero__chip-dot--green"></span> chaos:
+                    stable-ish</span>
+                <span class="hero__chip"><span class="hero__chip-dot hero__chip-dot--red"></span> sleep:
+                    corrupted</span>
+                <span class="hero__chip"><span class="hero__chip-dot hero__chip-dot--amber"></span> deploy confidence:
+                    12%</span>
+                <span class="hero__chip"><span class="hero__chip-dot hero__chip-dot--green"></span> uptime: surprisingly
+                    alive</span>
+                <span class="hero__chip"><span class="hero__chip-dot hero__chip-dot--cyan"></span> roadmap:
+                    vibes-based</span>
+                <span class="hero__chip"><span class="hero__chip-dot hero__chip-dot--red"></span> touched grass:
+                    false</span>
+            </div>
 
-<section id="domains">
-    <h2 class="section-title" data-lang="zh">官方域名</h2>
-    <h2 class="section-title" data-lang="en" style="display:none;">Official Domains</h2>
-    <div class="content-block">
-        <div class="domain-list">
-            <div class="domain-item">
-                <h3 data-lang="zh" style="display:none;">主站</h3>
-                <h3 data-lang="en">Main Site</h3>
-                <p><a href="https://404cto.com" target="_blank">404cto.com</a></p>
-                <p><a href="https://singularlab.xyz" target="_blank">singularlab.xyz</a></p>
-                <p><a href="https://singularitylab.top" target="_blank">singularitylab.top</a></p>
-            </div>
-            <div class="domain-item">
-                <h3 data-lang="zh" style="display:none;">泡泡棒</h3>
-                <h3 data-lang="en">Bubble Wand</h3>
-                <p><a href="https://yx.box" target="_blank">yx.box</a></p>
-                <p><a href="https://pods.icu" target="_blank">pods.icu</a></p>
-                <p><a href="https://bubblewand.xyz" target="_blank">bubblewand.xyz</a></p>
-                <p><a href="https://dicegame.bet" target="_blank" data-lang="en">dicegame.bet(Game Demo)</a></p>
-                <p><a href="https://dicegame.bet" target="_blank" data-lang="zh" style="display:none;">dicegame.bet(游戏Demo)</a></p>
-            </div>
-            <div class="domain-item">
-                <h3 data-lang="zh" style="display:none;">钱包工坊</h3>
-                <h3 data-lang="en">WalletCrafter</h3>
-                <p><a href="https://wallet.404cto.com" target="_blank">wallet.404cto.com</a></p>
-                <p><a href="https://wallet.404cto.com" target="_blank">wallet.singularitylab.top</a></p>
+            <!-- CTAs -->
+            <div class="hero__ctas">
+                <a href="#projects" class="hero__cta hero__cta--primary">View Projects</a>
+                <a href="#roadmap" class="hero__cta hero__cta--secondary">Read the Chaos Log</a>
             </div>
         </div>
-    </div>
-</section>
 
-<section id="team">
-    <h2 class="section-title" data-lang="zh">团队</h2>
-    <h2 class="section-title" data-lang="en" style="display:none;">Team</h2>
-    <div class="content-block team-grid">
-        <div class="team-member">
-            <img src="assets/member1.jpg" alt="ByteCat">
-            <h3>ByteCat</h3>
-            <p data-lang="zh">联合创始人、团队负责人</p>
-            <p data-lang="en" style="display:none;">Co-Founder、Team Leader</p>
-            <p data-lang="zh">来自迪拜的web3开发人员，团队大脑，设计和开发了许多令人惊叹的产品。</p>
-            <p data-lang="en" style="display:none;">A web3 developer from Dubai, team brain, who has designed and developed many amazing products.</p>
+        <!-- Scroll Indicator -->
+        <div class="hero__scroll">
+            <span>scroll</span>
+            <span class="hero__scroll-arrow">↓</span>
         </div>
-        <div class="team-member">
-            <img src="assets/member2.jpg" alt="Adam Warlock">
-            <h3>Adam Warlock</h3>
-            <p data-lang="zh">联合创始人、首席技术官</p>
-            <p data-lang="en" style="display:none;">Co-Founder、CSO</p>
-            <p data-lang="zh">资深技术专家，漫威狂热粉丝，web3研发、红队安全、防御追踪等技术领域的行业领军人物。</p>
-            <p data-lang="en" style="display:none;">A senior technical expert and avid Marvel fan, he is an industry leader in web3 research and development, red team security, defense tracing and other technical fields.</p>
-        </div>
-    </div>
-</section>
+    </section>
 
-<section id="social">
-    <h2 class="section-title" data-lang="zh">社交媒体</h2>
-    <h2 class="section-title" data-lang="en" style="display:none;">Social Media</h2>
-    <div class="social-links">
-        <div class="social-icons">
-            <!-- x -->
-            <a href="https://x.com/SingularityLabX" target="_blank">
-                <img src="assets/twitter.png" alt="X" style="width: 30px; height: 30px; margin-left: 30px;">
-                <span>Twitter/X</span>
+    <!-- ============================================
+       Projects Section
+       ============================================ -->
+    <div class="section-divider"></div>
+
+    <section class="projects" id="projects">
+        <div class="section-header reveal">
+            <div class="section-cmd">
+                <span class="prompt">$</span> ls ~/projects --deployed
+            </div>
+            <h2 class="section-title">Projects</h2>
+            <p class="section-subtitle">Things we built instead of sleeping.</p>
+        </div>
+
+        <div class="projects__grid">
+
+            <!-- ── DApp.meme (formerly Bubble Wand) ── -->
+            <div class="terminal-window project-card reveal">
+                <div class="terminal-titlebar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--yellow"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <span class="terminal-title">dapp-meme.exe</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="project-card__header">
+                        <div class="project-card__header-left">
+                            <img src="assets/dappmeme.png" alt="DApp.meme" class="project-card__icon-img">
+                            <h3 class="project-card__name">DApp.meme</h3>
+                        </div>
+                        <span class="status-badge status-badge--live">Live</span>
+                    </div>
+                    <p class="project-card__tagline">One-click deploy DApps for any token.</p>
+                    <p class="project-card__desc">Formerly Bubble Wand — now upgraded to DApp.meme. One-click deploy
+                        games, prediction markets, and PvP apps for any token on any chain. Built on Mobius DApp
+                        Protocol — from token to app to revenue, back to token. The loop your community didn't know it
+                        needed.</p>
+                    <div class="project-card__metrics">
+                        <div class="metric-row">
+                            <span class="metric-row__key">protocol:</span>
+                            <span class="metric-row__value">Mobius DApp Protocol (MDP)</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">templates:</span>
+                            <span class="metric-row__value">games / prediction / PvP / +</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">chains:</span>
+                            <span class="metric-row__value">BSC / ETH / Base / HyperEVM</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">loop:</span>
+                            <span class="metric-row__value">token → app → revenue → token</span>
+                        </div>
+                    </div>
+                    <div class="project-card__action">
+                        <a href="https://dapp.meme" target="_blank" class="terminal-link">
+                            <span class="prompt">$</span> open dapp.meme <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── X-Shield ── -->
+            <div class="terminal-window project-card reveal">
+                <div class="terminal-titlebar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--yellow"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <span class="terminal-title">x-shield.exe</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="project-card__header">
+                        <div class="project-card__header-left">
+                            <img src="assets/xshield.png" alt="X-Shield" class="project-card__icon-img">
+                            <h3 class="project-card__name">X-Shield</h3>
+                        </div>
+                        <span class="status-badge status-badge--live">Live</span>
+                    </div>
+                    <p class="project-card__tagline">Your timeline, slightly less cursed.</p>
+                    <p class="project-card__desc">Chrome extension that filters phishing links, wallet drainers, scam
+                        airdrops, and general timeline brain damage from X/Twitter. Because Web3 users clicking random
+                        links is apparently a lifestyle choice we need to protect.</p>
+                    <div class="project-card__metrics">
+                        <div class="metric-row">
+                            <span class="metric-row__key">platform:</span>
+                            <span class="metric-row__value">Chrome Extension</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">filters:</span>
+                            <span class="metric-row__value">phishing / drainers / scams / spam</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">mode:</span>
+                            <span class="metric-row__value">realtime filtering</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">survival rate:</span>
+                            <span class="metric-row__value">significantly improved</span>
+                        </div>
+                    </div>
+                    <div class="project-card__action">
+                        <a href="https://chromewebstore.google.com/detail/x-sheld/eobohieajklknfehicjgogonohkoecjb"
+                            target="_blank" class="terminal-link">
+                            <span class="prompt">$</span> install x-shield <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── WalletCrafter ── -->
+            <div class="terminal-window project-card reveal">
+                <div class="terminal-titlebar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--yellow"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <span class="terminal-title">wallet-crafter.exe</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="project-card__header">
+                        <div class="project-card__header-left">
+                            <img src="assets/walletcrafter.png" alt="WalletCrafter" class="project-card__icon-img">
+                            <h3 class="project-card__name">WalletCrafter</h3>
+                        </div>
+                        <span class="status-badge status-badge--live">Live</span>
+                    </div>
+                    <p class="project-card__tagline">Too many chains. One offline generator.</p>
+                    <p class="project-card__desc">Generate multichain wallet mnemonics without touching a server. Runs
+                        entirely on your device — web or Chrome extension. Your keys never leave your machine. Your
+                        paranoia is valid and we respect it.</p>
+                    <div class="project-card__metrics">
+                        <div class="metric-row">
+                            <span class="metric-row__key">chains:</span>
+                            <span class="metric-row__value">BTC / ETH / SOL / TRON / BCH / DOGE / +</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">mode:</span>
+                            <span class="metric-row__value">local-first / fully offline</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">platforms:</span>
+                            <span class="metric-row__value">web + Chrome extension</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">uploaded:</span>
+                            <span class="metric-row__value">nothing. ever.</span>
+                        </div>
+                    </div>
+                    <div class="project-card__action">
+                        <a href="https://wallet.404cto.com" target="_blank" class="terminal-link">
+                            <span class="prompt">$</span> open wallet.404cto.com <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── [REDACTED] ── -->
+            <div class="terminal-window project-card project-card--redacted reveal">
+                <div class="terminal-titlebar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--yellow"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <span class="terminal-title">???.exe</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="project-card__header">
+                        <div class="project-card__header-left">
+                            <img src="assets/staytuned.png" alt="Coming Soon" class="project-card__icon-img">
+                            <h3 class="project-card__name">[REDACTED]</h3>
+                        </div>
+                        <span class="status-badge status-badge--cooking">Cooking</span>
+                    </div>
+                    <p class="project-card__tagline">Something cursed is compiling.</p>
+                    <p class="project-card__desc">We can neither confirm nor deny the existence of this project. What we
+                        can say is: it involves smart contracts, questionable decisions, and at least one 3AM
+                        deployment.</p>
+                    <div class="project-card__metrics">
+                        <div class="metric-row">
+                            <span class="metric-row__key">status:</span>
+                            <span class="metric-row__value">probably legal. definitely weird.</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">ETA:</span>
+                            <span class="metric-row__value">when it's ready™</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-row__key">leak risk:</span>
+                            <span class="metric-row__value">high (we talk too much)</span>
+                        </div>
+                    </div>
+                    <div class="project-card__action">
+                        <span class="project-card__denied">
+                            <span class="prompt">$</span> access denied — clearance level insufficient
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================
+       Team Section
+       ============================================ -->
+    <div class="section-divider"></div>
+
+    <section class="team" id="team">
+        <div class="section-header reveal">
+            <div class="section-cmd">
+                <span class="prompt">$</span> cat /team/*
+            </div>
+            <h2 class="section-title">Team</h2>
+            <p class="section-subtitle">The humans behind the chaos.</p>
+        </div>
+
+        <div class="team__grid">
+
+            <!-- ── ByteCat ── -->
+            <div class="terminal-window team-card reveal">
+                <div class="terminal-titlebar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--yellow"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <span class="terminal-title">cat /team/bytecat</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="team-card__avatar-wrap">
+                        <img src="assets/bytecat.png" alt="ByteCat" class="team-card__avatar">
+                    </div>
+                    <div class="team-card__info">
+                        <h3 class="team-card__name">ByteCat</h3>
+                        <p class="team-card__role">Co-Founder / Full-Stack Architect</p>
+                        <div class="team-card__stats">
+                            <div class="team-card__stat">
+                                <span class="team-card__stat-key">stack:</span>
+                                <span class="team-card__stat-value">Solidity / React / Node / Rust</span>
+                            </div>
+                            <div class="team-card__stat">
+                                <span class="team-card__stat-key">vibe:</span>
+                                <span class="team-card__stat-value">turns cursed ideas into shipped products</span>
+                            </div>
+                            <div class="team-card__stat">
+                                <span class="team-card__stat-key">status:</span>
+                                <span class="team-card__stat-value">probably debugging something weird</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 0xAdam ── -->
+            <div class="terminal-window team-card reveal">
+                <div class="terminal-titlebar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot terminal-dot--red"></span>
+                        <span class="terminal-dot terminal-dot--yellow"></span>
+                        <span class="terminal-dot terminal-dot--green"></span>
+                    </div>
+                    <span class="terminal-title">cat /team/0xadam</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="team-card__avatar-wrap">
+                        <img src="assets/member2.jpg" alt="0xAdam" class="team-card__avatar">
+                    </div>
+                    <div class="team-card__info">
+                        <h3 class="team-card__name">0xAdam</h3>
+                        <p class="team-card__role">Co-Founder / Security Lead</p>
+                        <div class="team-card__stats">
+                            <div class="team-card__stat">
+                                <span class="team-card__stat-key">stack:</span>
+                                <span class="team-card__stat-value">Red Team / AI Security / Web3 Security</span>
+                            </div>
+                            <div class="team-card__stat">
+                                <span class="team-card__stat-key">vibe:</span>
+                                <span class="team-card__stat-value">finds ways before they become problems</span>
+                            </div>
+                            <div class="team-card__stat">
+                                <span class="team-card__stat-key">status:</span>
+                                <span class="team-card__stat-value">legally dangerous knowledge</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================
+       Roadmap Section (Deployment Log)
+       ============================================ -->
+    <div class="section-divider"></div>
+
+    <section class="roadmap" id="roadmap">
+        <div class="section-header reveal">
+            <div class="section-cmd">
+                <span class="prompt">$</span> git log --oneline --chaos
+            </div>
+            <h2 class="section-title">Deployment Log</h2>
+            <p class="section-subtitle">A brief history of shipping things that probably shouldn't exist.</p>
+        </div>
+
+        <div class="terminal-window roadmap__terminal reveal">
+            <div class="terminal-titlebar">
+                <div class="terminal-dots">
+                    <span class="terminal-dot terminal-dot--red"></span>
+                    <span class="terminal-dot terminal-dot--yellow"></span>
+                    <span class="terminal-dot terminal-dot--green"></span>
+                </div>
+                <span class="terminal-title">deployment.log</span>
+            </div>
+            <div class="terminal-body">
+                <div class="roadmap__cmd">
+                    <span class="prompt">$</span> cat deployment.log
+                </div>
+
+                <div class="roadmap__entries">
+
+                    <div class="roadmap__entry roadmap__entry--done">
+                        <div class="roadmap__entry-header">
+                            <span class="roadmap__entry-date">[2024-10]</span>
+                            <span class="roadmap__entry-status">✓</span>
+                        </div>
+                        <div class="roadmap__entry-title">
+                            <span class="action">init:</span> singularity-lab
+                        </div>
+                        <div class="roadmap__entry-desc">Spawned the first block of chaos.</div>
+                    </div>
+
+                    <div class="roadmap__entry roadmap__entry--done">
+                        <div class="roadmap__entry-header">
+                            <span class="roadmap__entry-date">[2024-11]</span>
+                            <span class="roadmap__entry-status">✓</span>
+                        </div>
+                        <div class="roadmap__entry-title">
+                            <span class="action">deploy:</span> x-shield v1.0
+                        </div>
+                        <div class="roadmap__entry-desc">Attempted to stop Web3 users from clicking cursed links.
+                            Results: ongoing.</div>
+                    </div>
+
+                    <div class="roadmap__entry roadmap__entry--done">
+                        <div class="roadmap__entry-header">
+                            <span class="roadmap__entry-date">[2024-12]</span>
+                            <span class="roadmap__entry-status">✓</span>
+                        </div>
+                        <div class="roadmap__entry-title">
+                            <span class="action">deploy:</span> bubble-wand v1.0 → DApp.meme
+                        </div>
+                        <div class="roadmap__entry-desc">Started as Bubble Wand — turned tokens into dice games. Now
+                            upgraded to DApp.meme: one-click deploy DApps for any token.</div>
+                    </div>
+
+                    <div class="roadmap__entry roadmap__entry--done">
+                        <div class="roadmap__entry-header">
+                            <span class="roadmap__entry-date">[2025-04]</span>
+                            <span class="roadmap__entry-status">✓</span>
+                        </div>
+                        <div class="roadmap__entry-title">
+                            <span class="action">deploy:</span> walletcrafter v1.0
+                        </div>
+                        <div class="roadmap__entry-desc">Generated wallets across too many chains. Still local-first.
+                        </div>
+                    </div>
+
+                    <div class="roadmap__entry roadmap__entry--done">
+                        <div class="roadmap__entry-header">
+                            <span class="roadmap__entry-date">[2025-05]</span>
+                            <span class="roadmap__entry-status">✓</span>
+                        </div>
+                        <div class="roadmap__entry-title">
+                            <span class="action">rename:</span> 404CTO
+                        </div>
+                        <div class="roadmap__entry-desc">Singularity Lab got a meme-native shell. Original lore remains.
+                        </div>
+                    </div>
+
+                    <div class="roadmap__entry roadmap__entry--pending">
+                        <div class="roadmap__entry-header">
+                            <span class="roadmap__entry-date">[2025-Q?]</span>
+                            <span class="roadmap__entry-status">⏳</span>
+                        </div>
+                        <div class="roadmap__entry-title">
+                            <span class="action">deploy:</span> [CLASSIFIED]
+                        </div>
+                        <div class="roadmap__entry-desc">Something cursed is compiling.</div>
+                    </div>
+
+                </div>
+
+                <div class="roadmap__cursor">
+                    <span class="prompt">$</span> <span class="cursor"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         Footer
+         ============================================ -->
+    <footer class="footer">
+        <div class="footer__divider"></div>
+
+        <!-- Footer Brand -->
+        <div class="footer__brand">
+            <div class="footer__brand-name">404CTO</div>
+            <div class="footer__brand-tagline">Still deploying weird internet infrastructure.</div>
+        </div>
+
+        <!-- Footer Status -->
+        <div class="footer__mini-status">
+            <span>status: <span class="text-green">alive</span></span>
+            <span class="footer__status-sep">·</span>
+            <span>uptime: <span class="text-green">questionable</span></span>
+            <span class="footer__status-sep">·</span>
+            <span>roadmap: <span class="text-amber">vibes-based</span></span>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer__contact">
+            <a href="mailto:404cto@proton.me" class="footer__contact-email">404cto@proton.me</a>
+        </div>
+
+        <!-- Social Links -->
+        <div class="footer__socials">
+            <a href="https://x.com/SingularityLabX" target="_blank" class="footer__social-link" title="Twitter/X">
+                <img src="assets/twitter.png" alt="X">
             </a>
-            <!-- warpcast -->
-            <a href="https://warpcast.com/0xsingularitylab" target="_blank">
-                <img src="assets/warpcast.png" alt="Warpcast" style="width: 30px; height: 30px; margin-left: 30px;">
-                <span>Warpcast</span>
+            <a href="https://t.me/slabdao" target="_blank" class="footer__social-link" title="Telegram">
+                <img src="assets/telegram.png" alt="Telegram">
             </a>
-            <!-- teletram -->
-            <a href="https://t.me/slabdao" target="_blank">
-                <img src="assets/telegram.png" alt="Telegram" style="width: 30px; height: 30px; margin-left: 30px;">
-                <span>Telegram</span>
+            <a href="https://github.com/0xSingularityLab" target="_blank" class="footer__social-link" title="GitHub">
+                <img src="assets/github.png" alt="GitHub">
             </a>
-            <!-- github -->
-            <a href="https://github.com/0xSingularityLab" target="_blank">
-                <img src="assets/github.png" alt="Github" style="width: 30px; height: 30px; margin-left: 30px;">
-                <span>Github</span>
-            </a>
-            <!-- medium -->
-            <a href="https://medium.com/@singularitylab" target="_blank">
-                <img src="assets/medium.png" alt="Medium" style="width: 30px; height: 30px; margin-left: 30px;">
-                <span>Medium</span>
-            </a>
-            <!-- discord -->
-            <a href="#" target="_blank">
-                <img src="assets/discord.png" alt="Discord" style="width: 30px; height: 30px; margin-left: 30px;">
-                <span>Discord</span>
-            </a>
-            <!-- linktr.ee -->
-            <a href="https://linktr.ee/singularitylab" target="_blank">
-                <img src="assets/linktree.jpg" alt="Discord" style="width: 30px; height: 30px; margin-left: 30px;">
-                <span>Linktr.ee</span>
-            </a>
-            <!-- Email --><br />
-            <a href="mailto:404cto@proton.me" target="_blank">
-                <span data-lang="en"><img src="assets/email.png" alt="Email" style="width: 30px; height: 30px; margin-left: 30px;">Join us/Business: 404cto@proton.me</span><span data-lang="zh" style="display:none;"><img src="assets/email.png" alt="Email" style="width: 30px; height: 30px; margin-left: 30px;">加入我们/商务合作: 404cto@proton.me</span>
+            <a href="#" target="_blank" class="footer__social-link" title="Discord">
+                <img src="assets/discord.png" alt="Discord">
             </a>
         </div>
-    </div>
-</section>
 
-<footer class="footer">
-    © 2025 404CTO × Singularity Lab. All Rights Reserved.
-</footer>
+        <!-- Copyright -->
+        <div class="footer__copyright">
+            © 2026 <a href="https://404cto.com">404CTO</a>. No suits were harmed in production.
+        </div>
+    </footer>
+
+    <!-- ============================================
+         Fake Error Modal (Easter Egg)
+         ============================================ -->
+    <div id="fake-error" class="fake-error-modal">
+        <button class="fake-error-modal__close">×</button>
+        <div class="fake-error-modal__title">ERROR 0x420</div>
+        <div class="fake-error-modal__msg">Too much chaos detected.</div>
+    </div>
 
 </body>
+
 </html>

@@ -1,0 +1,92 @@
+/* ============================================
+   404CTO V2 - Team Section (Upgraded)
+   ============================================ */
+
+.team {
+    padding: var(--space-5xl) var(--space-xl);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.team__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+}
+
+/* ── Team Card ── */
+.team-card {
+    /* inherits .terminal-window */
+}
+
+.team-card .terminal-body {
+    display: flex;
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+    align-items: flex-start;
+}
+
+/* ── Avatar ── */
+.team-card__avatar-wrap {
+    flex-shrink: 0;
+}
+
+.team-card__avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 2px solid var(--border-normal);
+    object-fit: cover;
+    transition: all var(--transition-normal);
+    filter: saturate(0.8);
+}
+
+.team-card:hover .team-card__avatar {
+    border-color: var(--green);
+    box-shadow: 0 0 20px var(--green-glow), 0 0 40px rgba(0, 255, 136, 0.1);
+    filter: saturate(1);
+}
+
+/* ── Info ── */
+.team-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.team-card__name {
+    font-size: var(--font-size-xl);
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+}
+
+.team-card__role {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+/* ── Stats (RPG style) ── */
+.team-card__stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.team-card__stat {
+    display: flex;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+.team-card__stat-key {
+    color: var(--text-dim);
+    min-width: 60px;
+    flex-shrink: 0;
+}
+
+.team-card__stat-value {
+    color: var(--green-text);
+}

@@ -1,0 +1,163 @@
+/* ============================================
+   404CTO V2 - Roadmap Section (Upgraded)
+   ============================================ */
+
+.roadmap {
+    padding: var(--space-5xl) var(--space-xl);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* ── Log Container (Terminal Window) ── */
+.roadmap__terminal {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.roadmap__terminal .terminal-body {
+    padding: var(--space-xl) var(--space-2xl);
+}
+
+/* ── Command Line ── */
+.roadmap__cmd {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.roadmap__cmd .prompt {
+    color: var(--green);
+}
+
+/* ── Log Entries ── */
+.roadmap__entries {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* ── Single Entry ── */
+.roadmap__entry {
+    position: relative;
+    padding-left: var(--space-xl);
+    border-left: 2px solid var(--border-subtle);
+    transition: border-color var(--transition-normal);
+}
+
+.roadmap__entry:hover {
+    border-left-color: var(--green);
+}
+
+/* ── Entry Dot ── */
+.roadmap__entry::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-normal);
+    transition: all var(--transition-normal);
+}
+
+.roadmap__entry:hover::before {
+    border-color: var(--green);
+    box-shadow: 0 0 8px var(--green-glow);
+    background: var(--green-bg);
+}
+
+/* ── Entry: Completed ── */
+.roadmap__entry--done::before {
+    border-color: var(--green);
+    background: var(--green);
+}
+
+/* ── Entry: Pending ── */
+.roadmap__entry--pending::before {
+    border-color: var(--amber);
+    background: transparent;
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+.roadmap__entry--pending {
+    border-left-color: rgba(255, 184, 0, 0.2);
+}
+
+/* ── Entry Header ── */
+.roadmap__entry-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.roadmap__entry-date {
+    font-size: var(--font-size-xs);
+    color: var(--green);
+    font-weight: 600;
+    background: var(--green-muted);
+    padding: 2px 10px;
+    border-radius: 4px;
+}
+
+.roadmap__entry-status {
+    font-size: var(--font-size-xs);
+    color: var(--green);
+}
+
+.roadmap__entry--pending .roadmap__entry-status {
+    color: var(--amber);
+}
+
+/* ── Entry Title ── */
+.roadmap__entry-title {
+    font-size: var(--font-size-base);
+    color: var(--green-text);
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+
+.roadmap__entry-title .action {
+    color: var(--cyan);
+}
+
+/* ── Entry Description ── */
+.roadmap__entry-desc {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.roadmap__entry-desc::before {
+    content: '"';
+    color: var(--text-dim);
+}
+
+.roadmap__entry-desc::after {
+    content: '"';
+    color: var(--text-dim);
+}
+
+/* ── Entry Meta ── */
+.roadmap__entry-meta {
+    font-size: var(--font-size-xs);
+    color: var(--text-dim);
+    margin-top: var(--space-xs);
+}
+
+/* ── Terminal Cursor at End ── */
+.roadmap__cursor {
+    margin-top: var(--space-2xl);
+    padding-left: var(--space-xl);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.roadmap__cursor .prompt {
+    color: var(--green);
+}
