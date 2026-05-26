@@ -107,6 +107,15 @@
 .roadmap__entry-status {
     font-size: var(--font-size-xs);
     color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.roadmap__entry-status svg {
+    display: block;
+    flex-shrink: 0;
 }
 
 .roadmap__entry--pending .roadmap__entry-status {
